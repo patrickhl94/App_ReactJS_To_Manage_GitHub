@@ -34,6 +34,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',
     'no-param-reassign': 'off',
+    'react/prefer-stateless-function': 'off',
     'camelcase': 'off',
     'no-unused-vars': ['error', { 'argdIgnorePAtter': 'next' }],
     'linebreak-style': 0,
