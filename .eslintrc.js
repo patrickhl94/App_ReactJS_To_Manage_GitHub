@@ -42,5 +42,6 @@ module.exports = {
     'no-unused-vars': ['error', { 'argdIgnorePAtter': 'next' }],
     'linebreak-style': 0,
     'global-require': 0,
+    'react/prop-types': 'off'
   },
 };
