@@ -12,6 +12,7 @@ export default class Main extends Component {
     newRepo: '',
     repositories: [],
     loading: false,
+    borderColor: true,
   };
 
   // Carregar os dados do localstorage
@@ -42,18 +43,30 @@ export default class Main extends Component {
 
     const { newRepo } = this.state;
 
-    const resp = await api.get(`repos/${newRepo}`);
+    try {
+      /**
+       * SE HOUVER ERRO, ELE CRIA O ERRO SE NÃO CONTINUA A TREAD
+       */
+      if (this.state.borderColor) {
+        throw new Error('Repositório duplicado');
+      }
 
-    const data = {
-      name: resp.data.full_name,
-    };
+      const resp = await api.get(`repos/${newRepo}`);
 
-    this.setState({
-      // eslint-disable-next-line react/no-access-state-in-setstate
-      repositories: [...this.state.repositories, data],
-      newRepo: '',
-      loading: false,
-    });
+      const data = {
+        name: resp.data.full_name,
+      };
+
+      this.setState({
+        // eslint-disable-next-line react/no-access-state-in-setstate
+        repositories: [...this.state.repositories, data],
+        newRepo: '',
+        loading: false,
+        borderColor: true,
+      });
+    } catch (error) {
+      this.setState({ loading: false, borderColor: false });
+    }
   };
 
   render() {
@@ -65,7 +78,7 @@ export default class Main extends Component {
           Repositórios
         </h1>
 
-        <Form onSubmit={this.handleSubmit}>
+        <Form borderColor={this.state.borderColor} onSubmit={this.handleSubmit}>
           <input
             type="text"
             placeholder="Adcionar Repositório"
