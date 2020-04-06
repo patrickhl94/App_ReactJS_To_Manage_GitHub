@@ -70,7 +70,7 @@ export default class Main extends Component {
   };
 
   render() {
-    const { repositories, loading, newRepo } = this.state;
+    const { repositories, loading, newRepo, borderColor } = this.state;
     return (
       <Container>
         <h1>
@@ -78,7 +78,7 @@ export default class Main extends Component {
           Repositórios
         </h1>
 
-        <Form borderColor={this.state.borderColor} onSubmit={this.handleSubmit}>
+        <Form borderColor={borderColor} onSubmit={this.handleSubmit}>
           <input
             type="text"
             placeholder="Adcionar Repositório"
@@ -87,7 +87,7 @@ export default class Main extends Component {
           />
 
           <SubmitButton loading={loading}>
-            {this.state.loading ? (
+            {loading ? (
               <FaSpinner color="#eee" size={14} />
             ) : (
               <FaPlus color="#eee" size={14} />
