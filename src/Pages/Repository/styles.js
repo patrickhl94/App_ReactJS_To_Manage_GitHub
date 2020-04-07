@@ -45,9 +45,7 @@ export const Owner = styled.header`
 `;
 
 export const IssueLIst = styled.ul`
-  padding-top: 30px;
-  margin-top: 30px;
-  border-top: 1px solid #eee;
+  margin-top: 15px;
   list-style: none;
 
   li {
@@ -97,5 +95,18 @@ export const IssueLIst = styled.ul`
         color: #999;
       }
     }
+  }
+`;
+
+export const FilterList = styled.div`
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+  margin-top: 30px;
+
+  select {
+    border: 1.5px solid #eee;
+    background: #fff;
+    border-radius: 4px;
+    padding: 2px;
   }
 `;
