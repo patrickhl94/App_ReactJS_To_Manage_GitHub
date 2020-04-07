@@ -6,7 +6,7 @@ import { FaSortAmountDown } from 'react-icons/fa';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Loading, Owner, IssueLIst, FilterList } from './styles';
+import { Loading, Owner, IssueLIst, FilterList, Pagination } from './styles';
 
 export default class Repository extends Component {
   static propTypes = {
@@ -33,13 +33,11 @@ export default class Repository extends Component {
       api.get(`/repos/${repoName}`),
       api.get(`/repos/${repoName}/issues`, {
         params: {
-          state: 'open',
+          state: this.state.filter,
           per_page: 5,
         },
       }),
     ]);
-
-    console.log(repository);
 
     this.setState({
       repository: repository.data,
@@ -50,6 +48,7 @@ export default class Repository extends Component {
 
   handleFIlter = (event) => {
     this.setState({ filter: event.target.value });
+    this.componentDidMount();
   };
 
   render() {
@@ -102,6 +101,14 @@ export default class Repository extends Component {
             </li>
           ))}
         </IssueLIst>
+        <Pagination>
+          <button type="button" onClick={() => {}}>
+            Voltar
+          </button>
+          <button type="button" onClick={() => {}}>
+            Próximo
+          </button>
+        </Pagination>
       </Container>
     );
   }
