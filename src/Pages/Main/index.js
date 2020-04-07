@@ -41,13 +41,18 @@ export default class Main extends Component {
 
     this.setState({ loading: true });
 
-    const { newRepo } = this.state;
+    const { newRepo, repositories } = this.state;
 
     try {
       /**
        * SE HOUVER ERRO, ELE CRIA O ERRO SE NÃO CONTINUA A TREAD
        */
-      if (this.state.borderColor) {
+
+      const duplicateRepo = repositories.findIndex(
+        (element) => element.name === newRepo
+      );
+
+      if (duplicateRepo !== -1) {
         throw new Error('Repositório duplicado');
       }
 
@@ -65,6 +70,7 @@ export default class Main extends Component {
         borderColor: true,
       });
     } catch (error) {
+      console.log(error);
       this.setState({ loading: false, borderColor: false });
     }
   };
