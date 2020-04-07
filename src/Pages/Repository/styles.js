@@ -104,9 +104,33 @@ export const FilterList = styled.div`
   margin-top: 30px;
 
   select {
-    border: 1.5px solid #eee;
+    border: 1.3px solid #eee;
     background: #fff;
     border-radius: 4px;
     padding: 2px;
+  }
+`;
+
+export const Pagination = styled.div`
+  display: flex;
+  flex: 1;
+  margin: 15px 0;
+  justify-content: space-between;
+
+  button {
+    width: 80px;
+    padding: 5px 0;
+    font-weight: 700;
+    background: #7159c1;
+    border-radius: 5px;
+    border: 1.5px solid #7159c1;
+    color: #fff;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    background: #4e2ac6;
+    color: #fff;
+    border: 1.5px solid #4e2ac6;
   }
 `;
