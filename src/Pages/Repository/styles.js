@@ -115,12 +115,17 @@ export const Pagination = styled.div`
   display: flex;
   flex: 1;
   margin: 15px 0;
+  align-items: center;
   justify-content: space-between;
+
+  span {
+    color: #999;
+  }
 
   button {
     width: 80px;
     padding: 5px 0;
-    font-weight: 700;
+    font-weight: 600;
     background: #7159c1;
     border-radius: 5px;
     border: 1.5px solid #7159c1;
