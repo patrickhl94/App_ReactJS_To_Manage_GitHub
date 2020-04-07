@@ -24,6 +24,7 @@ export default class Repository extends Component {
     loading: true,
     filter: 'all',
     page: 1,
+    displayButton: 'none',
   };
 
   async componentDidMount() {
@@ -114,10 +115,15 @@ export default class Repository extends Component {
         </IssueLIst>
         <Pagination>
           <button
+            style={{ display: this.state.displayButton }}
             type="button"
             onClick={() =>
               this.setState({
-                page: this.state.page > 1 ? this.state.page - 1 : 1,
+                page:
+                  this.state.page > 1
+                    ? this.state.page - 1 &&
+                      this.setState({ displayButton: '' })
+                    : this.setState({ displayButton: 'none' }),
               })
             }
           >
