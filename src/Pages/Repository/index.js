@@ -1,3 +1,4 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -22,6 +23,7 @@ export default class Repository extends Component {
     issues: [],
     loading: true,
     filter: 'all',
+    page: 1,
   };
 
   async componentDidMount() {
@@ -35,6 +37,7 @@ export default class Repository extends Component {
         params: {
           state: this.state.filter,
           per_page: 5,
+          page: this.state.page,
         },
       }),
     ]);
@@ -46,9 +49,17 @@ export default class Repository extends Component {
     });
   }
 
+  componentDidUpdate(_, prevState) {
+    if (prevState.filter !== this.state.filter) {
+      this.componentDidMount();
+    }
+    if (prevState.page !== this.state.filter) {
+      this.componentDidMount();
+    }
+  }
+
   handleFIlter = (event) => {
     this.setState({ filter: event.target.value });
-    this.componentDidMount();
   };
 
   render() {
@@ -102,10 +113,21 @@ export default class Repository extends Component {
           ))}
         </IssueLIst>
         <Pagination>
-          <button type="button" onClick={() => {}}>
+          <button
+            type="button"
+            onClick={() =>
+              this.setState({
+                page: this.state.page > 1 ? this.state.page - 1 : 1,
+              })
+            }
+          >
             Voltar
           </button>
-          <button type="button" onClick={() => {}}>
+          <span>Página {this.state.page}</span>
+          <button
+            type="button"
+            onClick={() => this.setState({ page: this.state.page + 1 })}
+          >
             Próximo
           </button>
         </Pagination>
