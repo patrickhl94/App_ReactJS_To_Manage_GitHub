@@ -31,8 +31,8 @@ export default class Repository extends Component {
     loading: true,
     filter: 'all',
     page: 1,
-    cursor: 'pointer',
-    disabled: false,
+    cursorActive: 'no-drop',
+    disabled: true,
   };
 
   async componentDidMount() {
@@ -62,6 +62,7 @@ export default class Repository extends Component {
       this.componentDidMount();
     }
     if (prevState.page !== this.state.filter) {
+      console.log(this.state);
       this.componentDidMount();
     }
   }
@@ -122,12 +123,14 @@ export default class Repository extends Component {
         </IssueLIst>
         <Pagination>
           <BtnReturn
-            cursor={this.state.cursor}
+            cursor={this.state.cursorActive}
             disabled={this.state.disabled}
             type="button"
             onClick={() =>
               this.setState({
                 page: this.state.page > 1 ? this.state.page - 1 : 1,
+                disabled: this.state.page < 2,
+                cursorActive: this.state.page <= 1 ? 'pointer' : 'no-drop',
               })
             }
           >
@@ -136,7 +139,13 @@ export default class Repository extends Component {
           <span>Página {this.state.page}</span>
           <button
             type="button"
-            onClick={() => this.setState({ page: this.state.page + 1 })}
+            onClick={() =>
+              this.setState({
+                page: this.state.page + 1,
+                disabled: this.state.page < 2,
+                cursorActive: this.state.page <= 1 ? 'pointer' : 'no-drop',
+              })
+            }
           >
             Próximo
           </button>
