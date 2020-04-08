@@ -7,7 +7,14 @@ import { FaSortAmountDown } from 'react-icons/fa';
 import api from '../../services/api';
 
 import Container from '../../components/Container';
-import { Loading, Owner, IssueLIst, FilterList, Pagination } from './styles';
+import {
+  Loading,
+  Owner,
+  IssueLIst,
+  FilterList,
+  Pagination,
+  BtnReturn,
+} from './styles';
 
 export default class Repository extends Component {
   static propTypes = {
@@ -24,7 +31,8 @@ export default class Repository extends Component {
     loading: true,
     filter: 'all',
     page: 1,
-    displayButton: 'none',
+    cursor: 'pointer',
+    disabled: false,
   };
 
   async componentDidMount() {
@@ -38,7 +46,6 @@ export default class Repository extends Component {
         params: {
           state: this.state.filter,
           per_page: 5,
-          page: this.state.page,
         },
       }),
     ]);
@@ -114,21 +121,18 @@ export default class Repository extends Component {
           ))}
         </IssueLIst>
         <Pagination>
-          <button
-            style={{ display: this.state.displayButton }}
+          <BtnReturn
+            cursor={this.state.cursor}
+            disabled={this.state.disabled}
             type="button"
             onClick={() =>
               this.setState({
-                page:
-                  this.state.page > 1
-                    ? this.state.page - 1 &&
-                      this.setState({ displayButton: '' })
-                    : this.setState({ displayButton: 'none' }),
+                page: this.state.page > 1 ? this.state.page - 1 : 1,
               })
             }
           >
             Voltar
-          </button>
+          </BtnReturn>
           <span>Página {this.state.page}</span>
           <button
             type="button"
