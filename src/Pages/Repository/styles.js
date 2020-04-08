@@ -140,8 +140,6 @@ export const Pagination = styled.div`
   }
 `;
 
-export const BtnReturn = styled.button.attrs({
-  disabled: (props) => props.disabled /* console.log(props.disabled) */,
-})`
+export const BtnReturn = styled.button`
   cursor: ${(props) => props.cursor};
 `;
