@@ -139,3 +139,9 @@ export const Pagination = styled.div`
     border: 1.5px solid #4e2ac6;
   }
 `;
+
+export const BtnReturn = styled.button.attrs({
+  disabled: (props) => props.disabled /* console.log(props.disabled) */,
+})`
+  cursor: ${(props) => props.cursor};
+`;
